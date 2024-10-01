@@ -1,0 +1,127 @@
+.custom-page .nav-link {
+  color: #353534 !important;
+  /* Cor preta para os links */
+  font-size: 1.2rem;
+  /* Ajuste o tamanho da fonte conforme necessário */
+}
+
+.custom-page .nav-link:hover {
+  color: #8bc097 !important;
+  /* Cor ao passar o mouse (opcional) */
+}
+
+.img-rounded {
+  border-radius: 15px !important;
+
+}
+
+/* Estilos para o Swiper */
+.menu-lateral {
+  position: fixed;
+  right: 10px;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+
+  a {
+    background-color: rgba(255, 255, 255, 0.418);
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease; /* Animação da troca de cor */
+  }
+
+  .ativo {
+    background-color: rgb(255, 234, 100);
+    height: 100px;
+    border-radius: 20px;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* Estilos básicos para centralizar a seta e os pontos */
+.scroll-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 20px; /* Ajuste a posição conforme necessário */
+  left: 50%;
+  transform: translateX(-50%);
+  height: 215vh;
+}
+
+.dots {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Espaçamento entre os pontos */
+}
+
+.dots span {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background-color: white;
+  border-radius: 50%;
+  animation: bounce 1.5s infinite;
+}
+
+/* Animação para os pontos */
+.dots span:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.dots span:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.dots span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+}
+
+.arrow {
+  margin-top: 0px;
+  font-size: 24px;
+  color: white;
+  animation: bounce-arrow 3s infinite ease-in-out;
+}
+
+/* Animação para a seta */
+@keyframes bounce-arrow {
+  0% {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(5px);
+  }
+  100% {
+    opacity: 0.8;
+    transform: translateY(10px);
+  }
+}
+
