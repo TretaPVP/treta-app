@@ -438,7 +438,7 @@
         onScroll();
       });
     </script>
-
+    <!--
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const menuLinks = document.querySelectorAll(".menu-lateral a");
@@ -483,6 +483,85 @@
           setTimeout(() => {
             isScrolling = false;
           }, 500); // 500ms de bloqueio para evitar múltiplos scrolls rápidos
+        });
+
+        // Ativa o primeiro item ao carregar a página
+        activateMenuItem(activeIndex);
+      });
+    </script>
+    -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuLinks = document.querySelectorAll(".menu-lateral a");
+        let activeIndex = 0; // Índice para controlar o item ativo no menu
+        let isScrolling = false; // Controle para bloquear múltiplos scrolls simultâneos
+
+        function activateMenuItem(index) {
+          if (index < 0 || index >= menuLinks.length) return; // Impede que o índice seja inválido
+
+          // Remove a classe 'ativo' de todos os links
+          menuLinks.forEach((link) => link.classList.remove("ativo"));
+
+          // Adiciona a classe 'ativo' ao link com o índice atual
+          menuLinks[index].classList.add("ativo");
+
+          // Rola suavemente para a seção alvo
+          smoothScrollToSection(index);
+        }
+
+        function smoothScrollToSection(targetIndex) {
+          const targetSection = document.querySelector(
+            menuLinks[targetIndex].getAttribute("href")
+          );
+          const targetPosition = targetSection.offsetTop;
+          const startPosition = window.pageYOffset;
+          const distance = targetPosition - startPosition;
+          const duration = 900; // Duração da transição em milissegundos
+          let startTime = null;
+
+          // Função de animação suave usando `requestAnimationFrame`
+          function animation(currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, distance, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) {
+              requestAnimationFrame(animation);
+            } else {
+              isScrolling = false; // Desbloqueia o scroll apenas após o fim da animação
+            }
+          }
+
+          // Função de easing para suavizar a transição
+          function ease(t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return (c / 2) * t * t + b;
+            t--;
+            return (-c / 2) * (t * (t - 2) - 1) + b;
+          }
+
+          requestAnimationFrame(animation);
+        }
+
+        // Adiciona o listener de rolagem (scroll do mouse)
+        document.addEventListener("wheel", function (event) {
+          if (isScrolling) return; // Se já está rolando, ignora novos scrolls
+
+          isScrolling = true; // Bloqueia novos eventos de scroll
+
+          if (event.deltaY > 0) {
+            // Scroll para baixo
+            if (activeIndex < menuLinks.length - 1) {
+              activeIndex++;
+            }
+          } else {
+            // Scroll para cima
+            if (activeIndex > 0) {
+              activeIndex--;
+            }
+          }
+
+          activateMenuItem(activeIndex); // Suave a transição para a seção correta
         });
 
         // Ativa o primeiro item ao carregar a página
