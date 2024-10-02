@@ -124,4 +124,42 @@ html {
     transform: translateY(10px);
   }
 }
+.menu-lateral .hide-menu-item {
+  display: none!important;
+}
 
+/*Estilo iframe Inscreva-se*/
+.inscrever {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+iframe {
+  width: 100%;
+  height: 560px; /* Ajuste a altura conforme necessário */
+  border: none;
+}
+
+.overlay-top {
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px; /* Altura da área a ser coberta */
+  background-color: white;
+  z-index: 10; /* Garante que o overlay fique sobre o iframe */
+}
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 20px; /* Altura da área a ser coberta */
+  background-color: white;
+}
